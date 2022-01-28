@@ -17,12 +17,29 @@ const howSum = (targetSum, numbers, memo = {}) => {
 
 console.log(howSum(24, [26]));
 
-
-
 // brute force
 // O(n^m * m) time
 // O(m) space
 
-// memoized
+// memoize d
 // O(o*m^2) time
+// O(m^2) space
+
+// howSum tabulation
+
+const howSumTab = (targetSum, numbers) => {
+  table = Array(targetSum + 1).fill(null);
+  table[0] = [];
+
+  for (let i = 0; i <= targetSum; i++) {
+    if (table[i] !== null) {
+      for (num of numbers) {
+        table[i + num] = [...table[i], num];
+      }
+    }
+    return table[targetSum];
+  }
+};
+
+// O(m^2 * n) time
 // O(m^2) space
