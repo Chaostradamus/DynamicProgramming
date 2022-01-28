@@ -18,7 +18,7 @@ const allConstruct = (target, wordBank, memo = {}) => {
   return result;
 };
 
-console.log(allConstruct('chao', ['ch', 'a', 'o', 'cha', 'c']))
+console.log(allConstruct("chao", ["ch", "a", "o", "cha", "c"]));
 
 // m = target.length
 // n = wordbank.length
@@ -30,3 +30,25 @@ console.log(allConstruct('chao', ['ch', 'a', 'o', 'cha', 'c']))
 // memoized
 // time: O(n * m^2)
 // space: O(m^2)
+
+// allconstruct tabulation method
+
+const allConstructTab = (target, wordBank) => {
+  const table = Array(target.length + 1)
+    .fill()
+    .map(() => []);
+  table[0] = [[]];
+
+  for (let i = 0; i <= target.length; i++) {
+    for (let word of wordBank) {
+      if (target.slice(i, i + word.length) === word) {
+        const newCombo = table[i].map((subArray) => [...subArray, word]);
+        table[i + word.length].push(...newCombo);
+      }
+    }
+  }
+  return table[target.length];
+};
+
+// ~O(n^m) time
+//  ~O(n^m) space
