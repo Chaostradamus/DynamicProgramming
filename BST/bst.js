@@ -20,6 +20,7 @@ class BST {
     this.count++;
 
     let newNode = new Node(value);
+
     const searchTree = (node) => {
       if (value < node.value) {
         if (!node.left) {
@@ -130,3 +131,4 @@ bst.insert(36);
 bst.insert(16);
 
 console.log(bst.bfs());
+console.log(bst.contains(24));
