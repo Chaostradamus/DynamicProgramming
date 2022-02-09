@@ -122,14 +122,12 @@ class BST {
   }
 }
 
-const bst = new BST(6);
 
-bst.insert(3);
+
+const bst = new BST(6);
 bst.insert(24);
-bst.insert(1987);
-bst.insert(26);
 bst.insert(36);
 bst.insert(16);
-
-console.log(bst.bfs());
-console.log(bst.contains(24));
+bst.insert(3);
+bst.insert(1);
+console.log(bst.postOrder());

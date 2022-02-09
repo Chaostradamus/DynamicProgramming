@@ -1,3 +1,4 @@
+from curses import A_BLINK
 import sys
 
 
