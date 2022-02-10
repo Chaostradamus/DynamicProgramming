@@ -64,8 +64,6 @@ class BST {
   inOrder() {
     let result = [];
 
-    this.count++;
-
     const traverse2 = (node) => {
       if (node.left) traverse2(node.left);
       result.push(node.value);
@@ -76,7 +74,7 @@ class BST {
   }
   preOrder() {
     let result = [];
-    let current = this.root;
+
     const traverse2 = (node) => {
       result.push(current.value);
       if (current.value < node.value) traverse2(current.left);
@@ -121,3 +119,5 @@ bst.insert(1);
 
 console.log(bst.inOrder());
 console.log(bst.contains(18));
+console.log(bst.max());
+console.log(bst.value);

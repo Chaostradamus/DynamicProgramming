@@ -1,8 +1,8 @@
 class Node {
   constructor(value) {
     this.value = value;
-    this.right = null;
     this.left = null;
+    this.right = null;
   }
 }
 
@@ -15,45 +15,36 @@ class BST {
   size() {
     return this.count;
   }
-
   insert(value) {
-    this.count++;
-
     let newNode = new Node(value);
-
-    const searchTree = (node) => {
+    this.count++;
+    const search = (node) => {
       if (value < node.value) {
         if (!node.left) {
           node.left = newNode;
         } else {
-          searchTree(node.left);
+          search(node.left);
         }
       } else if (value > node.value) {
         if (!node.right) {
           node.right = newNode;
         } else {
-          searchTree(node.right);
+          search(node.right);
         }
       }
     };
-    searchTree(this.root);
+    search(this.root);
   }
-
   min() {
     let current = this.root;
 
-    while (current.left) {
-      current = current.left;
-    }
-
+    while (current.left) current = current.left;
     return current.value;
   }
-
   max() {
     let current = this.root;
-    while (current.right) {
-      current = current.right;
-    }
+
+    while (current.right) current = current.right;
     return current.value;
   }
 
@@ -62,46 +53,43 @@ class BST {
 
     while (current) {
       if (value === current.value) return true;
-      if (value < current.value) {
-        current = current.left;
-      } else {
-        current = current.right;
-      }
+      else if (value < current.value) current = current.left;
+      else if (value > current.value) current = current.right;
     }
     return false;
   }
 
-  inOrder() {
+  inorder() {
     let result = [];
 
-    const traverse = (node) => {
-      if (node.left) traverse(node.left);
+    const travel = (node) => {
+      if (node.left) travel(node.left);
       result.push(node.value);
-      if (node.right) traverse(node.right);
+      if (node.right) travel(node.right);
     };
-    traverse(this.root);
+    travel(this.root);
     return result;
   }
-
-  preOrder() {
+  preorder() {
     let result = [];
-    const traverse = (node) => {
+
+    const travel = (node) => {
+      if (node.left) travel(node.left);
+      if (node.right) travel(node.right);
       result.push(node.value);
-      if (node.left) traverse(node.left);
-      if (node.right) traverse(node.right);
     };
-    traverse(this.root);
+    travel(this.root);
     return result;
   }
-
-  postOrder() {
+  postorder() {
     let result = [];
-    const traverse = (node) => {
-      if (node.left) traverse(node.left);
-      if (node.right) traverse(node.right);
+
+    const travel = (node) => {
       result.push(node.value);
+      if (node.left) travel(node.left);
+      if (node.right) travel(node.right);
     };
-    traverse(this.root);
+    travel(this.root);
     return result;
   }
 
@@ -110,11 +98,9 @@ class BST {
     let queue = [];
 
     queue.push(this.root);
-
     while (queue.length) {
       let current = queue.shift();
       result.push(current.value);
-
       if (current.left) queue.push(current.left);
       if (current.right) queue.push(current.right);
     }
@@ -122,12 +108,14 @@ class BST {
   }
 }
 
-
-
 const bst = new BST(6);
+bst.insert(16);
 bst.insert(24);
 bst.insert(36);
-bst.insert(16);
+bst.insert(26);
 bst.insert(3);
-bst.insert(1);
-console.log(bst.postOrder());
+bst.insert(4);
+
+console.log(bst.inorder());
+console.log(bst.preorder());
+console.log(bst.postorder());
